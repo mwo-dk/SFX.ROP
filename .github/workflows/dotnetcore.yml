@@ -15,7 +15,7 @@ jobs:
         dotnet-version: 3.0.100
     - name: Build 
       run: dotnet build --configuration Release
-    -name: Test
+    - name: Test
       run: dotnet test ./tst/ROP.Tests/ROP.Tests.fsproj
     - name: Build NuGet Package
       run: 
