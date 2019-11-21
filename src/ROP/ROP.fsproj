@@ -4,8 +4,18 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <RootNamespace>SFX.ROP</RootNamespace>
     <PackageId>SFX.ROP</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <IsPackable>true</IsPackable>
+
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Authors>Michael W. Olesen</Authors>
+    <Company>-</Company>
+    <Description>The small ROP library from Scott Wlashin's note on Railway Oriented Programming</Description>
+    <Copyright>Michael W. Olesen</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/mwo-dk/SFX.ROP</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mwo-dk/SFX.ROP</RepositoryUrl>
+    <PackageTags>railway oriented programming F#</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
