@@ -1,0 +1,25 @@
+name: .NET Core
+
+on: [pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.0.100
+    - name: Build 
+      run: dotnet build --configuration Release
+    -name: Test
+      run: dotnet test ./tst/ROP.Tests/ROP.Tests.fsproj
+    - name: Build NuGet Package
+      run: 
+        dotnet pack ./src/ROP/ROP.fsproj --configuration Release -o ./nuget
+    - name: Deploy NuGet Package
+      run: dotnet nuget push /home/runner/work/SFX.ROP/SFX.ROP/nuget/SFX.ROP.1.0.0.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+
