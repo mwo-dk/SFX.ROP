@@ -6,12 +6,10 @@ type Result<'TSuccess,'TFailure> =
     | Failure of 'TFailure
 
 // convert a single value into a two-track result
-let succeed x = 
-    Success x
+let succeed = Success
 
 // convert a single value into a two-track result
-let fail x = 
-    Failure x
+let fail = Failure
 
 // apply either a success function or failure function
 let either successFunc failureFunc twoTrackInput =
@@ -21,7 +19,7 @@ let either successFunc failureFunc twoTrackInput =
 
 // convert a switch function into a two-track function
 let bind f = 
-    either f fail
+    fail |> either f
 
 // pipe a two-track value into a switch function 
 let (>>=) x f = 
