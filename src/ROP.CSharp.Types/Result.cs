@@ -24,11 +24,11 @@ namespace SFX.ROP.CSharp
             (Value, Error) = (value, error);
 
         /// <summary>
-        /// The result of the operation if success full
+        /// The result of the operation if successful
         /// </summary>
         public T Value { get; }
         /// <summary>
-        /// The error of the operation if successfull
+        /// The error of the operation if not that successfull
         /// </summary>
         public Exception Error { get; }
 
