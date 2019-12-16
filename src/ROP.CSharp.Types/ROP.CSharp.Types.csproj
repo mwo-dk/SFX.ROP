@@ -2,7 +2,27 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <RootNamespace>ROP.CSharp</RootNamespace>
+    <RootNamespace>SFX.ROP</RootNamespace>
+    <PackageId>SFX.ROP.CSharp.Types</PackageId>
+    <Version>$(Version)</Version>
+    <FileVersion>$(Version)</FileVersion>
+    <AssemblyVersion>$(Version)</AssemblyVersion>
+    <IsPackable>true</IsPackable>
+
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Authors>Michael W. Olesen</Authors>
+    <Company>-</Company>
+    <Description>Supporting types for SFX.ROP</Description>
+    <Copyright>Michael W. Olesen</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/mwo-dk/SFX.ROP</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mwo-dk/SFX.ROP</RepositoryUrl>
+    <PackageTags>railway types oriented programming C#</PackageTags>
+    <PackageIcon>dingir.png</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="dingir.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
 </Project>
