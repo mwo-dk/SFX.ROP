@@ -26,7 +26,7 @@ jobs:
         dotnet pack ./src/ROP/ROP.fsproj --configuration Release -o ./nuget
         dotnet pack ./src/ROP.Types/ROP.Types.fsproj --configuration Release -o ./nuget
     - name: Deploy NuGet C# Packages
-      run: 
+      run: |
         dotnet nuget push /home/runner/work/SFX.ROP/SFX.ROP/nuget/SFX.ROP.CSharp.*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
         dotnet nuget push /home/runner/work/SFX.ROP/SFX.ROP/nuget/SFX.ROP.CSharp.Types.*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
     - name: Deploy NuGet F# Packages
