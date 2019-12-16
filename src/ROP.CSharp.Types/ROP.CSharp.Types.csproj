@@ -12,7 +12,7 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Authors>Michael W. Olesen</Authors>
     <Company>-</Company>
-    <Description>Supporting types for SFX.ROP</Description>
+    <Description>Supporting types for SFX.ROP.CSharp</Description>
     <Copyright>Michael W. Olesen</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/mwo-dk/SFX.ROP</PackageProjectUrl>
