@@ -1,9 +1,6 @@
 ﻿module SFX.ROP
 
-// the two-track type
-type Result<'TSuccess,'TFailure> = 
-    | Success of 'TSuccess
-    | Failure of 'TFailure
+open SFX.ROP.Types
 
 // convert a single value into a two-track result
 let succeed = Success
@@ -59,3 +56,12 @@ let plus addSuccess addFailure switch1 switch2 x =
     | Failure f1,Success _  -> Failure f1
     | Success _ ,Failure f2 -> Failure f2
     | Failure f1,Failure f2 -> Failure (addFailure f1 f2)
+
+
+// Alias
+type CSResult<'a> = SFX.ROP.CSharp.Result<'a>
+
+// Convert a C# Result<'a> to the local sum type
+let toResult (x: CSResult<'a>) =
+    if x.Error |> isNull then x.Error |> fail
+    else x.Value |> succeed
