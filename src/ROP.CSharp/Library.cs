@@ -153,13 +153,8 @@ namespace ROP.CSharp
             result switch
             {
                 Result<T, Exception>.Success x => Succeed(x.Item),
-                Result<T, Exception>.Failure err => Fail<T>(err.Item)
+                Result<T, Exception>.Failure err => Fail<T>(err.Item),
+                _ => Fail<T>(new Exception()) // Should never happen
             };
-        
-    }
-
-    public sealed class CombinatorHelper<T>
-    {
-
     }
 }
