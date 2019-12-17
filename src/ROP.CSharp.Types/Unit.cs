@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ROP.CSharp
+namespace SFX.ROP.CSharp
 {
     /// <summary>
     /// Represents a void type, since <see cref="System.Void"/> is not a valid return type in C#.
