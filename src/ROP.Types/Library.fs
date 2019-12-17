@@ -1,7 +1,9 @@
-﻿[<AutoOpen>]
-module SFX.ROP.Types
+﻿namespace SFX.ROP
 
-// the two-track type
-type Result<'TSuccess,'TFailure> = 
-    | Success of 'TSuccess
-    | Failure of 'TFailure
+[<AutoOpen>]
+module Types =
+
+    // the two-track type
+    type Result<'TSuccess,'TFailure> = 
+        | Success of 'TSuccess
+        | Failure of 'TFailure
