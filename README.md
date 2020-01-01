@@ -28,8 +28,8 @@ public struct Result<T>
     public T Value { get; }
     public Exception Error { get; }
 
-    public void Deconstruct(out bool success, out Exception error, out T value) =>
-        (success, error, value) = (Error is null, Error, Value);
+    public void Deconstruct(out bool success, out T value, out Exception error) =>
+        (success, value, error) = (Error is null, Value, Error);
 
     public static implicit operator T(Result<T> x)
     {
@@ -49,7 +49,7 @@ static Result<decimal> ComputeThatAmount(bool happy, decimal result) =>
     happy ? Succeed(result) : Fail<decimal>(new UnhappyException());
 
 var aResult = ComputeThatAmount(happy); // aResult is Result<decimal>
-var (ok, error, result) = ComputeThatAmount(happy); // ok is bool and if true then error is something, if false error is null and result has a value
+var (ok, result, error) = ComputeThatAmount(happy); // ok is bool and if true then error is something, if false error is null and result has a value
 
 try {
     decimal result = ComputeThatAmount(happy); // Using the implicit cast operator, that may throw an exception.
