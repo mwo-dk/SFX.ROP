@@ -12,7 +12,7 @@ namespace SFX.ROP.CSharp
     /// 2) Enables default "fallback" to exception typed flow via an implicit cast
     /// operator, that throws the provided exception if one has been provided
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">The <see cref="Type"/> of a success full outcome</typeparam>
     public struct Result<T>
     {
         /// <summary>
@@ -36,10 +36,10 @@ namespace SFX.ROP.CSharp
         /// Deconstructor
         /// </summary>
         /// <param name="success">Flag telling whether the operation was successfull</param>
+        /// <param name="value">The result - if successfull</param>
         /// <param name="error">The <see cref="Exception"/> if present</param>
-        /// <param name="value">The result - of successfull</param>
-        public void Deconstruct(out bool success, out Exception error, out T value) =>
-            (success, error, value) = (Error is null, Error, Value);
+        public void Deconstruct(out bool success, out T value, out Exception error) =>
+            (success, value, error) = (Error is null, Value, Error);
 
         /// <summary>
         /// Implicit cast to the value if the operation was successfull

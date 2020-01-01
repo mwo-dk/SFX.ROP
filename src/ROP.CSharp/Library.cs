@@ -39,7 +39,7 @@ namespace SFX.ROP.CSharp
         public static void Either<T>(this Result<T> twoTrackInput,
             Action<T> successHandler, Action<Exception> errorHandler)
         {
-            var (ok, error, result) = twoTrackInput;
+            var (ok, result, error) = twoTrackInput;
             if (ok) successHandler(result);
             else errorHandler(error);
         }
@@ -55,7 +55,7 @@ namespace SFX.ROP.CSharp
         public static T Either<T>(this Result<Unit> twoTrackInput,
             Func<T> successHandler, Func<Exception, T> errorHandler)
         {
-            var (ok, error, result) = twoTrackInput;
+            var (ok, _, error) = twoTrackInput;
             if (ok) return successHandler();
             else return errorHandler(error);
         }
@@ -72,7 +72,7 @@ namespace SFX.ROP.CSharp
         public static U Either<T, U>(this Result<T> twoTrackInput,
             Func<T, U> successHandler, Func<Exception, U> errorHandler)
         {
-            var (ok, error, result) = twoTrackInput;
+            var (ok, result, error) = twoTrackInput;
             if (ok) return successHandler(result);
             else return errorHandler(error);
         }

@@ -60,7 +60,41 @@ module Impl =
         | Success _ ,Failure f2 -> Failure f2
         | Failure f1,Failure f2 -> Failure (addFailure f1 f2)
 
-
+    let partitionResults results =
+        let successes =
+            results |>
+            Seq.map (fun x ->
+                match x with
+                | Success value -> value |> Some
+                | _ -> None) |>
+            Seq.choose id |>
+            Seq.toArray
+        let failures = 
+            results |>
+            Seq.map (fun x ->
+                match x with
+                | Failure value -> value |> Some
+                | _ -> None) |>
+            Seq.choose id |>
+            Seq.toArray
+        (successes, failures)
+    
+    let private toPartialFailure successes failures =
+        {
+            Successes = successes
+            Failures = failures
+        }
+    let aggregateResults results =
+        let successes, failures = results |> partitionResults
+        match successes |> Array.isEmpty, failures |> Array.isEmpty with
+        | false, false ->
+            toPartialFailure successes failures |> Partial |> fail
+        | false, true ->
+            successes |> Seq.toArray |> succeed
+        | true, false ->
+            failures |> Full |> fail
+        | true, true ->
+            Empty |> fail
     // Alias
     type CSResult<'a> = SFX.ROP.CSharp.Result<'a>
 
