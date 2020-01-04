@@ -5,54 +5,54 @@ module Impl =
 
     open SFX.ROP
 
-    // convert a single value into a two-track result
+    /// Convert a single value into a two-track result
     let succeed = Success
 
-    // convert a single value into a two-track result
+    /// Convert a single value into a two-track result
     let fail = Failure
 
-    // apply either a success function or failure function
+    /// Apply either a success function or failure function
     let either successFunc failureFunc twoTrackInput =
         match twoTrackInput with
         | Success s -> successFunc s
         | Failure f -> failureFunc f
 
-    // convert a switch function into a two-track function
+    /// Convert a switch function into a two-track function
     let bind f = 
         fail |> either f
 
-    // pipe a two-track value into a switch function 
+    /// Pipe a two-track value into a switch function 
     let (>>=) x f = 
         bind f x
 
-    // compose two switches into another switch
+    /// Compose two switches into another switch
     let (>=>) s1 s2 = 
         s1 >> bind s2
 
-    // convert a one-track function into a switch
+    /// Convert a one-track function into a switch
     let switch f = 
         f >> succeed
 
-    // convert a one-track function into a two-track function
+    /// Convert a one-track function into a two-track function
     let map f = 
         either (f >> succeed) fail
 
-    // convert a dead-end function into a one-track function
+    /// Convert a dead-end function into a one-track function
     let tee f x = 
         f x; x 
 
-    // convert a one-track function into a switch with exception handling
+    /// Convert a one-track function into a switch with exception handling
     let tryCatch f exnHandler x =
         try
             f x |> succeed
         with
         | ex -> exnHandler ex |> fail
 
-    // convert two one-track functions into a two-track function
+    /// Convert two one-track functions into a two-track function
     let doubleMap successFunc failureFunc =
         either (successFunc >> succeed) (failureFunc >> fail)
 
-    // add two switches in parallel
+    /// Add two switches in parallel
     let plus addSuccess addFailure switch1 switch2 x = 
         match (switch1 x),(switch2 x) with
         | Success s1,Success s2 -> Success (addSuccess s1 s2)
@@ -60,6 +60,7 @@ module Impl =
         | Success _ ,Failure f2 -> Failure f2
         | Failure f1,Failure f2 -> Failure (addFailure f1 f2)
 
+    /// Partitions a sequence of Result<,>s into successes and failures
     let partitionResults results =
         let successes =
             results |>
@@ -79,11 +80,15 @@ module Impl =
             Seq.toArray
         (successes, failures)
     
+    /// Simple constructor for PartialFailure<,>
     let private toPartialFailure successes failures =
         {
             Successes = successes
             Failures = failures
         }
+
+    /// Aggregates a Result<,> seq into a combined
+    /// Result<'a array, ResultSummary<'a,'b>>
     let aggregateResults results =
         let successes, failures = results |> partitionResults
         match successes |> Array.isEmpty, failures |> Array.isEmpty with
@@ -95,10 +100,11 @@ module Impl =
             failures |> Full |> fail
         | true, true ->
             Empty |> fail
-    // Alias
+
+    /// Alias for the CSharp type Result<>
     type CSResult<'a> = SFX.ROP.CSharp.Result<'a>
 
-    // Convert a C# Result<'a> to the local sum type
+    /// Convert a C# Result<'a> to the local sum type
     let toResult (x: CSResult<'a>) =
         if x.Error |> isNull then x.Error |> fail
         else x.Value |> succeed
