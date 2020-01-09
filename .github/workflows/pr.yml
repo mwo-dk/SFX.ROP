@@ -1,6 +1,9 @@
 name: .NET Core
 
-on: pull_request
+on:  
+    push:
+        branches-ignore:
+            - master
 
 jobs:
   build:
