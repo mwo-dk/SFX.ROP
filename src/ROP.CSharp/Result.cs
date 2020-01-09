@@ -49,6 +49,11 @@ namespace SFX.CSROP
             else return x.Value;
         }
 
+        /// <summary>
+        /// Implicit cast to briding type <see cref="ROP.Bridge.Result"/> in
+        /// order to facilitate bridging between the F# sum-type and this simpler type
+        /// </summary>
+        /// <param name="x">The <see cref="Result{T}"/> to cast</param>
         public static implicit operator ROP.Bridge.Result<T>(Result<T> x) =>
             new ROP.Bridge.Result<T>(x.Value, x.Error);
     }
