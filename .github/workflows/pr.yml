@@ -13,23 +13,9 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.100
-    - name: Build 
-      run: dotnet build --configuration Release
     - name: Test
-      run: dotnet test ./tst/ROP.Tests/ROP.Tests.fsproj
-    - name: Build C# NuGet Packages
-      run: |
-        dotnet pack ./src/ROP.CSharp/ROP.CSharp.csproj --configuration Release -o ./nuget
-        dotnet pack ./src/ROP.CSharp.Types/ROP.CSharp.Types.csproj --configuration Release -o ./nuget
-    - name: Build F# Nuget Packages
-      run: |
-        dotnet pack ./src/ROP/ROP.fsproj --configuration Release -o ./nuget
-        dotnet pack ./src/ROP.Types/ROP.Types.fsproj --configuration Release -o ./nuget
-    - name: Deploy NuGet C# Packages
-      run: |
-        dotnet nuget push /home/runner/work/SFX.ROP/SFX.ROP/nuget/SFX.ROP.CSharp.*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
-        dotnet nuget push /home/runner/work/SFX.ROP/SFX.ROP/nuget/SFX.ROP.CSharp.Types.*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
-    - name: Deploy NuGet F# Packages
-      run: |
-        dotnet nuget push /home/runner/work/SFX.ROP/SFX.ROP/nuget/SFX.ROP.*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
-        dotnet nuget push /home/runner/work/SFX.ROP/SFX.ROP/nuget/SFX.ROP.Types.*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+      run: dotnet test ./SFX.ROP.sln --configuration Release 
+    - name: Build NuGet Packages
+      run: dotnet pack ./SFX.ROP.sln --configuration Release --include-symbols -p:SymbolPackageFormat=snupkg -o ./nuget
+    - name: Deploy NuGet Packages
+      run: dotnet nuget push /home/runner/work/SFX.ROP/SFX.ROP/nuget/SFX.ROP*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
