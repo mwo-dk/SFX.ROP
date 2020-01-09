@@ -3,34 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <RootNamespace>SFX.ROP</RootNamespace>
-    <PackageId>SFX.ROP</PackageId>
     <Version>$(Version)</Version>
     <FileVersion>$(Version)</FileVersion>
     <AssemblyVersion>$(Version)</AssemblyVersion>
-    <IsPackable>true</IsPackable>
-
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Authors>Michael W. Olesen</Authors>
-    <Company>-</Company>
-    <Description>The small ROP library from Scott Wlashin's note on Railway Oriented Programming</Description>
-    <Copyright>Michael W. Olesen</Copyright>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/mwo-dk/SFX.ROP</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/mwo-dk/SFX.ROP</RepositoryUrl>
-    <PackageTags>railway oriented programming F#</PackageTags>
-    <PackageIcon>dingir.png</PackageIcon>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="Library.fs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="dingir.png" Pack="true" PackagePath="\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\ROP.CSharp.Types\ROP.CSharp.Types.csproj" />
-    <ProjectReference Include="..\ROP.Types\ROP.Types.fsproj" />
   </ItemGroup>
 </Project>

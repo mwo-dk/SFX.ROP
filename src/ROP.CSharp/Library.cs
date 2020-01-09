@@ -1,7 +1,7 @@
 ﻿using System;
-using static SFX.ROP.Types;
+using static SFX.ROP;
 
-namespace SFX.ROP.CSharp
+namespace SFX.CSROP
 {
     /// <summary>
     /// Wanna-be C# ROP module

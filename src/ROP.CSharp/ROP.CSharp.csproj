@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <RootNamespace>SFX.ROP</RootNamespace>
-    <PackageId>SFX.ROP.CSharp</PackageId>
+    <RootNamespace>SFX.CSROP</RootNamespace>
+    <PackageId>SFX.ROP</PackageId>
     <Version>$(Version)</Version>
     <FileVersion>$(Version)</FileVersion>
     <AssemblyVersion>$(Version)</AssemblyVersion>
@@ -17,7 +17,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/mwo-dk/SFX.ROP</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mwo-dk/SFX.ROP</RepositoryUrl>
-    <PackageTags>railway oriented programming C#</PackageTags>
+    <PackageTags>railway oriented programming F# C#</PackageTags>
     <PackageIcon>dingir.png</PackageIcon>
   </PropertyGroup>
 
@@ -26,7 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ROP.CSharp.Types\ROP.CSharp.Types.csproj" />
-    <ProjectReference Include="..\ROP.Types\ROP.Types.fsproj" />
+    <ProjectReference Include="..\ROP\ROP.fsproj" />
   </ItemGroup>
 </Project>

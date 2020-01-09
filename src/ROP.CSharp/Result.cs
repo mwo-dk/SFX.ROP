@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("ROP.CSharp")]
-
-namespace SFX.ROP.CSharp
+namespace SFX.CSROP
 {
     /// <summary>
     /// Represents the result of an operation/invokation. It is not a full two track
@@ -51,5 +48,8 @@ namespace SFX.ROP.CSharp
                 throw x.Error;
             else return x.Value;
         }
+
+        public static implicit operator ROP.Bridge.Result<T>(Result<T> x) =>
+            new ROP.Bridge.Result<T>(x.Value, x.Error);
     }
 }
